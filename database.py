@@ -22,8 +22,12 @@ def delete_series():
 def update_series():
     pass
 
-def get_series():
-    pass
+def get_series(series_name:str):
+    with open(MOVIES_FILE_PATH, "r") as data:
+        reader = csv.DictReader(data, delimiter=",")
+        for item in reader:
+            if item.get("NAME") == series_name:
+                return item
 
 def update_series_fields():
     tempfile = NamedTemporaryFile("w+t", newline='', delete=False)
@@ -41,3 +45,4 @@ def update_series_fields():
 
 if __name__ == "__main__":
     update_series_fields()
+    print(get_series("adios"))
