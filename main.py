@@ -10,6 +10,7 @@ usuario escoge opcion
 
 si opcion == "agregar serie"
     agregarserie()
+    print("Serie agregada exitosamente! :D")
 
 si opcion == "modificar datos de una seria"
     ...
