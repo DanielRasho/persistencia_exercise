@@ -2,7 +2,7 @@ from tempfile import NamedTemporaryFile
 import shutil
 import csv
 
-FIELDS = [
+MOVIES_FIELDS = [
 "NAME",
 "STATE", 
 "EPISODE DURATION", 
@@ -19,15 +19,22 @@ def add_series():
 def delete_series():
     pass
 
-def update_series():
-    pass
+def update_series(series_name:str, field_to_modify:str, new_value:str):
+    tempfile = NamedTemporaryFile("w+t", newline='', delete=False)
 
-def get_series(series_name:str):
-    with open(MOVIES_FILE_PATH, "r") as data:
+    with open(MOVIES_FILE_PATH, "r") as data, tempfile:
         reader = csv.DictReader(data, delimiter=",")
+        writer = csv.DictWriter(tempfile, MOVIES_FIELDS, delimiter=",")
+        
+        writer.writeheader()
+    
         for item in reader:
             if item.get("NAME") == series_name:
-                return item
+                item[field_to_modify] = new_value
+                writer.writerow(item)
+            else:
+                writer.writerow(item)
+    shutil.move(tempfile.name, MOVIES_FILE_PATH)
 
 def update_series_fields():
     tempfile = NamedTemporaryFile("w+t", newline='', delete=False)
@@ -38,11 +45,26 @@ def update_series_fields():
         
         for line, row in enumerate(reader):
             if line == 0:
-                writer.writerow(FIELDS)
+                writer.writerow(MOVIES_FIELDS)
             else:
                 writer.writerow(row)
     shutil.move(tempfile.name, MOVIES_FILE_PATH)
 
+def get_series(series_name:str):
+    with open(MOVIES_FILE_PATH, "r") as data:
+        reader = csv.DictReader(data, delimiter=",")
+        for item in reader:
+            if item.get("NAME") == series_name:
+                return item
+
+def get_series_items_names():
+    items = []
+    with open(MOVIES_FILE_PATH, "r") as data:
+        reader = csv.DictReader(data, delimiter=",")
+        for item in reader:
+            items.append(item.get("NAME"))
+    return items
+
 if __name__ == "__main__":
-    update_series_fields()
-    print(get_series("adios"))
+    print(get_series_items_names())
+    
