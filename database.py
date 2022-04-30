@@ -13,11 +13,29 @@ MOVIES_FIELDS = [
 
 MOVIES_FILE_PATH = "data/movies.csv"
 
-def add_series():
-    pass
+def add_series(name, state, episode_duration, watched_episodes, platform):
+    time_invested = int(episode_duration) * int(watched_episodes)
+    with open(MOVIES_FILE_PATH, "a") as data:
+        writer = csv.writer(data, MOVIES_FIELDS)
+        saved_series = get_series_items_names()
 
-def delete_series():
-    pass
+        if name not in saved_series:
+            writer.writerow([name, state, episode_duration, watched_episodes, platform, time_invested])
+
+def delete_series(series_name:str):
+    tempfile = NamedTemporaryFile("w+t", newline='', delete=False)
+
+    with open(MOVIES_FILE_PATH, "r") as data, tempfile:
+        reader = csv.DictReader(data, delimiter=",")
+        writer = csv.DictWriter(tempfile, MOVIES_FIELDS, delimiter=",")
+        
+        writer.writeheader()
+
+        for item in reader:
+            if item.get("NAME") != series_name:
+                writer.writerow(item)
+
+    shutil.move(tempfile.name, MOVIES_FILE_PATH)
 
 def update_series(series_name:str, field_to_modify:str, new_value:str):
     tempfile = NamedTemporaryFile("w+t", newline='', delete=False)
@@ -65,6 +83,14 @@ def get_series_items_names():
             items.append(item.get("NAME"))
     return items
 
+def get_platforms():
+    items = []
+    with open(MOVIES_FILE_PATH, "r") as data:
+        reader = csv.DictReader(data, delimiter=",")
+        for item in reader:
+            if item.get("PLATFORM") not in items:
+                items.append(item.get("PLATFORM"))
+    return items
+
 if __name__ == "__main__":
-    print(get_series_items_names())
-    
+    pass
