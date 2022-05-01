@@ -20,19 +20,20 @@ def add_series(name, state, episode_duration, watched_episodes, platform):
         writer.writerow([name, state, episode_duration, watched_episodes, platform, time_invested])
 
 def delete_series(series_name:str):
-    tempfile = NamedTemporaryFile("w+t", newline='', delete=False)
+    if is_series_saved(series_name) == True:
+        tempfile = NamedTemporaryFile("w+t", newline='', delete=False)
 
-    with open(MOVIES_FILE_PATH, "r") as data, tempfile:
-        reader = csv.DictReader(data, delimiter=",")
-        writer = csv.DictWriter(tempfile, MOVIES_FIELDS.keys(), delimiter=",")
-        
-        writer.writeheader()
+        with open(MOVIES_FILE_PATH, "r") as data, tempfile:
+            reader = csv.DictReader(data, delimiter=",")
+            writer = csv.DictWriter(tempfile, MOVIES_FIELDS.keys(), delimiter=",")
+            
+            writer.writeheader()
 
-        for item in reader:
-            if item.get("NAME") != series_name:
-                writer.writerow(item)
+            for item in reader:
+                if item.get("NAME") != series_name:
+                    writer.writerow(item)
 
-    shutil.move(tempfile.name, MOVIES_FILE_PATH)
+        shutil.move(tempfile.name, MOVIES_FILE_PATH)
 
 def update_series(series_name:str, field_to_modify:str, new_value:str):
     tempfile = NamedTemporaryFile("w+t", newline='', delete=False)
