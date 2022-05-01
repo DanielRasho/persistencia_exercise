@@ -1,6 +1,11 @@
+from asyncore import read
+from distutils.log import info
+from operator import delitem
 from tempfile import NamedTemporaryFile
 import shutil
 import csv
+from prettytable import PrettyTable, from_csv
+import prettytable
 
 MOVIES_FIELDS = {
 "NAME": str,
@@ -95,6 +100,11 @@ def is_series_saved(series_name:str):
         if series_name.upper() == series.upper():
             return True
     return False
+
+def read_series():
+    csv_file = open(MOVIES_FILE_PATH)
+    pT = from_csv(csv_file)
+    print(pT)
 
 if __name__ == "__main__":
     print(is_series_saved("hola"))
