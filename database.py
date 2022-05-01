@@ -2,32 +2,29 @@ from tempfile import NamedTemporaryFile
 import shutil
 import csv
 
-MOVIES_FIELDS = [
-"NAME",
-"STATE", 
-"EPISODE DURATION", 
-"WATCHED_EPISODES", 
-"PLATFORM", 
-"TIME INVESTED"
-]
+MOVIES_FIELDS = {
+"NAME": str,
+"STATE": str, 
+"EPISODE DURATION": int, 
+"WATCHED_EPISODES": int, 
+"PLATFORM": str, 
+"TIME INVESTED": int
+}
 
 MOVIES_FILE_PATH = "data/movies.csv"
 
 def add_series(name, state, episode_duration, watched_episodes, platform):
     time_invested = int(episode_duration) * int(watched_episodes)
     with open(MOVIES_FILE_PATH, "a") as data:
-        writer = csv.writer(data, MOVIES_FIELDS)
-        saved_series = get_series_items_names()
-
-        if name not in saved_series:
-            writer.writerow([name, state, episode_duration, watched_episodes, platform, time_invested])
+        writer = csv.writer(data, MOVIES_FIELDS.keys())
+        writer.writerow([name, state, episode_duration, watched_episodes, platform, time_invested])
 
 def delete_series(series_name:str):
     tempfile = NamedTemporaryFile("w+t", newline='', delete=False)
 
     with open(MOVIES_FILE_PATH, "r") as data, tempfile:
         reader = csv.DictReader(data, delimiter=",")
-        writer = csv.DictWriter(tempfile, MOVIES_FIELDS, delimiter=",")
+        writer = csv.DictWriter(tempfile, MOVIES_FIELDS.keys(), delimiter=",")
         
         writer.writeheader()
 
@@ -42,7 +39,7 @@ def update_series(series_name:str, field_to_modify:str, new_value:str):
 
     with open(MOVIES_FILE_PATH, "r") as data, tempfile:
         reader = csv.DictReader(data, delimiter=",")
-        writer = csv.DictWriter(tempfile, MOVIES_FIELDS, delimiter=",")
+        writer = csv.DictWriter(tempfile, MOVIES_FIELDS.keys(), delimiter=",")
         
         writer.writeheader()
     
@@ -63,7 +60,7 @@ def update_series_fields():
         
         for line, row in enumerate(reader):
             if line == 0:
-                writer.writerow(MOVIES_FIELDS)
+                writer.writerow(MOVIES_FIELDS.keys())
             else:
                 writer.writerow(row)
     shutil.move(tempfile.name, MOVIES_FILE_PATH)
@@ -92,5 +89,11 @@ def get_platforms():
                 items.append(item.get("PLATFORM"))
     return items
 
+def is_series_saved(series_name:str):
+    for series in get_series_items_names() :
+        if series_name.upper() == series.upper():
+            return True
+    return False
+
 if __name__ == "__main__":
-    pass
+    print(is_series_saved("hola"))
