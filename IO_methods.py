@@ -80,7 +80,7 @@ def input_new_series():
                             "Stop watching it"],
                             "Move around with <DOWN ARROW>, <UP ARROW>, confirm with <ENTER>",
                             return_value=True)
-            episode_duration = numeric_slider("What is the average episode duration?",
+            episode_duration = numeric_slider("What is the average episode duration (minutes)?",
                             "Move around with <RIGHT ARROW>, <LEFT ARROW>, confirm with <ENTER>",
                             start=10, step=10)
             watched_episodes = numeric_slider("How many episodes have you watched?",
@@ -107,7 +107,9 @@ def input_update_series():
                     list(database.MOVIES_FIELDS.keys()),
                     "Move around with <DOWN ARROW>, <UP ARROW>, confirm with <ENTER>",
                     return_value=True)
+
     field_type = database.MOVIES_FIELDS[field_to_edit]
+
     if field_type is str:
         new_value = input(f"Enter your new value for {field_to_edit}: ")
     elif field_type is int:
