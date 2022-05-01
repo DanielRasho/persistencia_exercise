@@ -8,5 +8,5 @@ with open ("requirements.txt", "r") as modules_depedencies:
 try:
     pkg_resources.require(dependencies)
 except DistributionNotFound:
-    print("Missing libreries, if you use pip, run:\n\n\tpython -m pip install -r requirements.txt")
+    print("Missing libreries, if you use pip, try running in this location:\n\n\tpython -m pip install -r requirements.txt")
     exit()
