@@ -3,7 +3,7 @@
 #   
 #   
 #   
-from sre_parse import State
+import setup
 from IO_methods import input_new_series, input_update_series, menu_builder, clean_screen
 import database
 
