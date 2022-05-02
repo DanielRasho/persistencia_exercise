@@ -36,7 +36,7 @@ def numeric_slider(header: str, footer: str, start = 0, step = 1, just_positive_
     options = [start]
     while True:
         # Print Menu
-        #clean_screen()
+        clean_screen()
         print(f"{header}\n")
         print(f"<< {options[abs(cursor_position)]} >>")
         print(f"\n{footer}")

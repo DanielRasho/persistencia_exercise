@@ -12,7 +12,7 @@ from database import read_series
 
 
 while True:
-    #clean_screen()
+    clean_screen()
     selected_option = menu_builder("NOW, WHAT YOU WANNA DO?",
                                     ["Add new series",
                                     "Delete series",
