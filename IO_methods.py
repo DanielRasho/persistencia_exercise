@@ -2,8 +2,9 @@ from readchar import readkey, key
 import os
 import database
 
-# Builds an interface where user can choose beetween given options.
 def menu_builder(header: str, options: list, footer: str, return_value = False, default_options = []):
+    # Builds an interface where user can choose beetween given options.
+
     cursor_position = 0
     options += default_options
 
@@ -30,8 +31,9 @@ def menu_builder(header: str, options: list, footer: str, return_value = False, 
             if return_value is True: return options[cursor_position]
             else: return cursor_position
 
-# Builds an interface where user can move to write a numeric value
 def numeric_slider(header: str, footer: str, start = 0, step = 1, just_positive_values = True):
+    # Builds an interface where user can move to write a numeric value
+
     cursor_position = 0
     options = [start]
     while True:
@@ -62,14 +64,15 @@ def numeric_slider(header: str, footer: str, start = 0, step = 1, just_positive_
             elif (cursor_position * step)  > start:
                 cursor_position = 0
 
-# Cleans terminal screen  
 def clean_screen():
+    # Cleans terminal screen  
     if os.name == "posix":  # If program is executed in Linux or Mac
         os.system("clear")
     else:
         os.system("cls")
 
 def input_new_series():
+    # Just a shortcut to ask user for data for a new item.
     while True:
         name = input("Enter your series name: ")
         if database.is_series_saved(name) == False:
@@ -99,6 +102,7 @@ def input_new_series():
             input()
 
 def input_update_series():
+    # Just a shortcut to ask user for data to update an existent item.
     series_to_edit = menu_builder("What series you wanna edit?",
                     database.get_series_items_names(),
                     "Move around with <DOWN ARROW>, <UP ARROW>, confirm with <ENTER>",

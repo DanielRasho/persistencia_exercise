@@ -1,6 +1,10 @@
-import pkg_resources
-from pkg_resources import DistributionNotFound, VersionConflict
+import pkg_resources    # Functionalities to check project requirements.
+from pkg_resources import DistributionNotFound
 
+"""
+This script checks if the user has all dependencies installed. 
+    If not, it just stop the execution.
+"""
 dependencies = []
 with open ("requirements.txt", "r") as modules_depedencies:
     for modules in modules_depedencies:
