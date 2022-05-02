@@ -9,8 +9,6 @@ import database
 from database import print_series
 from statistics_functions import Most_Watched_Series, Most_Common_Streaming_Plat, Finished_Series_Counter
 
-
-
 while True:
     clean_screen()
     selected_option = menu_builder("NOW, WHAT YOU WANNA DO?",
@@ -36,10 +34,9 @@ while True:
             database.update_series(*update_item_data)
     if selected_option == "View tracked series":
         print_series()
-    if selected_option == "Show Statistics":
+    if selected_option == "Show statistics":
         Most_Watched_Series()
         Most_Common_Streaming_Plat()
         Finished_Series_Counter()
-        #break
     if selected_option == "Exit":
             exit()

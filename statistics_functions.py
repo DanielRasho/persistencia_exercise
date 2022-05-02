@@ -7,7 +7,6 @@ def Most_Watched_Series():
     with open(MOVIES_FILE_PATH, "r") as data:
         series_time_invested = {}
         series = {}
-        #reader = csv.DictReader(data, delimiter=",")
         header = data.readline().rstrip().split(",")
         content = data.readlines()
     
@@ -25,13 +24,12 @@ def Most_Watched_Series():
     
     most_watched_serie = max(series_time_invested, key=series_time_invested.get)
         
-    print("The serie in which you have invested most time is:",most_watched_serie)
+    print("\nThe serie in which you have invested most time is:",most_watched_serie)
 
 def Most_Common_Streaming_Plat():
     with open(MOVIES_FILE_PATH, "r") as data:
         platforms = []
         series = {}
-        #reader = csv.DictReader(data, delimiter=",")
         header = data.readline().rstrip().split(",")
         content = data.readlines()
     
@@ -63,8 +61,6 @@ def Most_Common_Streaming_Plat():
 def Finished_Series_Counter():
     with open(MOVIES_FILE_PATH, "r") as data:
         Finished_series = 0
-        series = {}
-        #reader = csv.DictReader(data, delimiter=",")
         header = data.readline().rstrip().split(",")
         content = data.readlines()
     
