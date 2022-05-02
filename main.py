@@ -6,7 +6,7 @@
 import setup
 from IO_methods import input_new_series, input_update_series, menu_builder, clean_screen
 import database
-from database import read_series
+from database import print_series
 from statistics_functions import Most_Watched_Series, Most_Common_Streaming_Plat, Finished_Series_Counter
 
 
@@ -35,12 +35,11 @@ while True:
             update_item_data = input_update_series()
             database.update_series(*update_item_data)
     if selected_option == "View tracked series":
-        read_series()
-        break
+        print_series()
     if selected_option == "Show Statistics":
         Most_Watched_Series()
         Most_Common_Streaming_Plat()
         Finished_Series_Counter()
-        break
+        #break
     if selected_option == "Exit":
             exit()

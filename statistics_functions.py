@@ -4,28 +4,28 @@ from multiprocessing.sharedctypes import Value
 MOVIES_FILE_PATH = "data/movies.csv"
 #FIND THE SERIES WITH MOST SPENT TIME 
 def Most_Watched_Series():
-        with open(MOVIES_FILE_PATH, "r") as data:
-            series_time_invested = {}
-            series = {}
-            #reader = csv.DictReader(data, delimiter=",")
-            header = data.readline().rstrip().split(",")
-            content = data.readlines()
+    with open(MOVIES_FILE_PATH, "r") as data:
+        series_time_invested = {}
+        series = {}
+        #reader = csv.DictReader(data, delimiter=",")
+        header = data.readline().rstrip().split(",")
+        content = data.readlines()
     
-        for element in range(len(content)):
-            content[element] = content[element].rstrip().split(",")
+    for element in range(len(content)):
+        content[element] = content[element].rstrip().split(",")
         
-            dataS = {}
+        dataS = {}
         
-            for column in range(len(header)):
-                dataS[header[column]] = dataS[element][column]
+        for column in range(len(header)):
+            dataS[header[column]] = content[element][column]
 
-            series.update(dataS)
+        series.update(dataS)
 
-            series_time_invested[series['NAME']] = series['TIME INVESTED']
+        series_time_invested[series['NAME']] = series['TIME INVESTED']
     
-        most_watched_serie = max(series_time_invested, key=series_time_invested.get)
+    most_watched_serie = max(series_time_invested, key=series_time_invested.get)
         
-        return print("The serie in which you have invested most time is:",most_watched_serie)
+    print("The serie in which you have invested most time is:",most_watched_serie)
 
 def Most_Common_Streaming_Plat():
     with open(MOVIES_FILE_PATH, "r") as data:
@@ -58,7 +58,7 @@ def Most_Common_Streaming_Plat():
         pc_counter = {key: value for (key, value) in sorted(platform_concurrency.items(), key=lambda x: x[1], reverse=True)}
         pc_counter = list(pc_counter)
 
-        return print("The platform in which you have concurred most of the time is:", pc_counter[0])
+    print("The platform in which you have concurred most of the time is:", pc_counter[0])
 
 def Finished_Series_Counter():
     with open(MOVIES_FILE_PATH, "r") as data:
@@ -81,4 +81,5 @@ def Finished_Series_Counter():
                 else:
                     Finished_series = Finished_series
         
-        return print("You have finished a total of: " + str(Finished_series) + " series.")
+    print("You have finished a total of: " + str(Finished_series) + " series.")
+    input("\nPress <ENTER> to continue...\n")
