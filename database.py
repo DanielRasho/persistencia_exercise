@@ -1,10 +1,8 @@
-from asyncore import read
-from distutils.log import info
 from operator import delitem
 from tempfile import NamedTemporaryFile
 import shutil
 import csv
-from prettytable import PrettyTable, from_csv
+from prettytable import from_csv
 import prettytable
 
 MOVIES_FIELDS = {
@@ -16,7 +14,7 @@ MOVIES_FIELDS = {
 "TIME INVESTED": int
 }
 
-MOVIES_FILE_PATH = "data/movies.csv"
+MOVIES_FILE_PATH = "data/movies.csv"  # Relative path to database
 
 def add_series(name, state, episode_duration, watched_episodes, platform):
     time_invested = int(episode_duration) * int(watched_episodes)
@@ -79,6 +77,7 @@ def get_series(series_name:str):
                 return item
 
 def get_series_items_names():
+    # Return a list[] of existent platforms within the database.
     items = []
     with open(MOVIES_FILE_PATH, "r") as data:
         reader = csv.DictReader(data, delimiter=",")
@@ -87,6 +86,7 @@ def get_series_items_names():
     return items
 
 def get_platforms():
+    # Return a list[] of existent platforms within the database.
     items = []
     with open(MOVIES_FILE_PATH, "r") as data:
         reader = csv.DictReader(data, delimiter=",")
@@ -96,15 +96,14 @@ def get_platforms():
     return items
 
 def is_series_saved(series_name:str):
+    # Return a bool if a given series_name exist.
     for series in get_series_items_names() :
         if series_name.upper() == series.upper():
             return True
     return False
 
-def read_series():
-    csv_file = open(MOVIES_FILE_PATH)
-    pT = from_csv(csv_file)
-    print(pT)
-
-if __name__ == "__main__":
-    print(is_series_saved("hola"))
+def print_series():
+    with open(MOVIES_FILE_PATH, "r") as csv_file:
+        pT = from_csv(csv_file)
+        print(pT)
+        input("\nPress <ENTER> to continue...\n")

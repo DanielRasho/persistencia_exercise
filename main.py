@@ -3,13 +3,9 @@
 #   
 #   
 #   
-from sre_parse import State
-from turtle import clear
+import setup
 from IO_methods import input_new_series, input_update_series, menu_builder, clean_screen
 import database
-from database import read_series
-
-
 
 while True:
     clean_screen()
@@ -35,7 +31,7 @@ while True:
             update_item_data = input_update_series()
             database.update_series(*update_item_data)
     if selected_option == "View tracked series":
-           read_series()
+           database.print_series()
            #break
     if selected_option == "Show Statistics":
             pass
