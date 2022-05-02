@@ -7,7 +7,7 @@ import setup
 from IO_methods import input_new_series, input_update_series, menu_builder, clean_screen
 import database
 from database import read_series
-from statistics_functions import Most_Watched_Series, Most_Common_Streaming_Plat
+from statistics_functions import Most_Watched_Series, Most_Common_Streaming_Plat, Finished_Series_Counter
 
 
 
@@ -40,6 +40,7 @@ while True:
     if selected_option == "Show Statistics":
         Most_Watched_Series()
         Most_Common_Streaming_Plat()
+        Finished_Series_Counter()
         break
     if selected_option == "Exit":
             exit()
