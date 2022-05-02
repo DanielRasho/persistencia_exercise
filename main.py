@@ -39,6 +39,7 @@ while True:
         break
     if selected_option == "Show Statistics":
         Most_Watched_Series()
+        Most_Common_Streaming_Plat()
         break
     if selected_option == "Exit":
             exit()
