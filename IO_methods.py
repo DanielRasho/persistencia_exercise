@@ -108,7 +108,7 @@ def input_update_series():
                     "Move around with <DOWN ARROW>, <UP ARROW>, confirm with <ENTER>",
                     return_value=True)
     field_to_edit = menu_builder("What field you wanna edit?",
-                    list(database.MOVIES_FIELDS.keys()),
+                    list(database.MOVIES_FIELDS.keys())[:-1],
                     "Move around with <DOWN ARROW>, <UP ARROW>, confirm with <ENTER>",
                     return_value=True)
 

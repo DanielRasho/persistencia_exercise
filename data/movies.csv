@@ -1,9 +1,11 @@
-NAME,STATE,EPISODE DURATION,WATCHED_EPISODES,PLATFORM,TIME INVESTED
+NAME,STATE,EPISODE DURATION,WATCHED EPISODES,PLATFORM,TIME INVESTED
 Friends,Finished,22,236,HBO Max,5192
 The Mandalorian,Watching,40,12,Disney Plus,480
 Lost,Watch later,40,0,Star Plus,0
 Scrubs,Watching,22,92,Star Plus,2024
-Game of Thrones,Finished,60,73,HBO Max,4380
+Game of Thrones,Finished,60,9,HBO Max,4380
 Stranger Things,Finished,60,25,Netflix,1500
 Elite,Stop watching it,50,8,Netflix,400
 How I Met Your Mother,Watch later,22,0,Amazon Prime,0
+Spy x Family,Watching,23,4,CrunchyRoll,92
+popeye,Finished,30,1,Disney Plus,30

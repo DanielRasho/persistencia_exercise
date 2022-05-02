@@ -9,7 +9,7 @@ MOVIES_FIELDS = {
 "NAME": str,
 "STATE": str, 
 "EPISODE DURATION": int, 
-"WATCHED_EPISODES": int, 
+"WATCHED EPISODES": int, 
 "PLATFORM": str, 
 "TIME INVESTED": int
 }
@@ -38,7 +38,7 @@ def delete_series(series_name:str):
 
         shutil.move(tempfile.name, MOVIES_FILE_PATH)
 
-def update_series(series_name:str, field_to_modify:str, new_value:str):
+def edit_series(series_name:str, field_to_modify:str, new_value:str):
     tempfile = NamedTemporaryFile("w+t", newline='', delete=False)
 
     with open(MOVIES_FILE_PATH, "r") as data, tempfile:
@@ -50,6 +50,7 @@ def update_series(series_name:str, field_to_modify:str, new_value:str):
         for item in reader:
             if item.get("NAME") == series_name:
                 item[field_to_modify] = new_value
+                item["TIME INVESTED"] = int(item["EPISODE DURATION"]) * int(item["WATCHED EPISODES"])
                 writer.writerow(item)
             else:
                 writer.writerow(item)
@@ -68,6 +69,7 @@ def update_series_fields():
             else:
                 writer.writerow(row)
     shutil.move(tempfile.name, MOVIES_FILE_PATH)
+    
 
 def get_series(series_name:str):
     with open(MOVIES_FILE_PATH, "r") as data:
