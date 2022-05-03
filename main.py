@@ -1,8 +1,11 @@
-# PERSONAL EXERCISE 1
-# PROGRAM TO TRACK MOVIES AND SERIES:
-#   
-#   
-#   
+# ==================================================== #
+#                  Name: Exercise #4 
+#          Authors: Xavier López & Daniel Rayo
+#                 Date: 28/04 ~ 02/05
+# ==================================================== #
+
+#Program's Purpose: Provide to the user capability of tracking and modifying his(er) series data list.
+
 import setup
 from IO_methods import input_new_series, input_update_series, menu_builder, clean_screen
 import database
